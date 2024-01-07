@@ -1,34 +1,31 @@
 class Solution {
-    List<List<Integer>> adj = new ArrayList<>();
-    List<List<Integer>> result;
-
+    ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+    List<List<Integer>> res = new ArrayList<>();
     public List<List<Integer>> getAncestors(int n, int[][] edges) {
-        result = new ArrayList<>(n);
-        for (int i = 0; i < n; i++) {
-            adj.add(new ArrayList<>());
-            result.add(new ArrayList<>());
+
+        // reverse the edges
+        for(int i=0;i<n;i++){
+            res.add(new ArrayList<Integer>());
+            adj.add(new ArrayList<Integer>());
         }
 
-        for (int[] edge : edges) {
-            adj.get(edge[1]).add(edge[0]);
-        }
+        for(int [] edge:edges)
+        adj.get(edge[1]).add(edge[0]);
 
-        for (int i = 0; i < n; i++) {
-            boolean[] visited = new boolean[n];
-            dfs(i, visited, i);
+        for(int i=0;i<n;i++){
+            boolean vis[]=new boolean[n];
+            dfs(i,vis,i);
         }
-        for(List<Integer> e : result)
+        for(List<Integer> e: res)
         Collections.sort(e);
-        return result;
+        return res;
     }
-
-    private void dfs(int current, boolean[] visited, int start) {
-        visited[current] = true;
-        for (Integer ancestor : adj.get(current)) {
-            if (!visited[ancestor]) {
-                result.get(start).add(ancestor);
-                dfs(ancestor, visited, start);
-            }
+    public void dfs(int node, boolean[] vis, int start){
+        vis[node]=true;
+        for(int ele : adj.get(node)){
+            if(!vis[ele])
+            {res.get(start).add(ele);
+            dfs(ele,vis,start);}
         }
     }
 }
