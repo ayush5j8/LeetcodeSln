@@ -1,17 +1,17 @@
 class Solution {
     public int findDuplicate(int[] nums) {
-        int slow = nums[0];
-        int fast = nums[0];
+        // linked list approach
+        int turt = nums[0], hare = nums[0];
         do { 
-            slow = nums[slow];
-            fast = nums[nums[fast]];
-        } while(slow != fast);
-        
-        fast = nums[0];
-        while(slow != fast) {
-            slow = nums[slow];
-            fast = nums[fast];
+            turt = nums[turt];
+            hare = nums[nums[hare]];
+            } 
+        while(turt != hare);
+        hare = nums[0];
+        while(turt != hare) {
+            turt = nums[turt];
+            hare = nums[hare];
         }
-        return fast;
+        return hare;
     }
 }
