@@ -22,20 +22,18 @@ class Solution {
     while (len >= k) {
         ListNode curr = prevGroupEnd.next;
         ListNode prev = null;
-        ListNode groupStart = curr; // Start of the current group
-        
-        // Reverse k nodes
+        ListNode groupStart = curr;
+
         for (int i = 0; i < k; i++) {
             ListNode next = curr.next;
             curr.next = prev;
             prev = curr;
             curr = next;
         }
-        
-        // Connect previous group with the reversed one
+
         prevGroupEnd.next = prev;
-        groupStart.next = curr; // Connect tail of reversed group to remaining nodes
-        prevGroupEnd = groupStart; // Move prevGroupEnd to the end of the newly reversed group
+        groupStart.next = curr;
+        prevGroupEnd = groupStart;
         
         len -= k;
     }
@@ -51,5 +49,4 @@ public int GetTotalNodes(ListNode head) {
     }
     return count;
 }
-
 }
