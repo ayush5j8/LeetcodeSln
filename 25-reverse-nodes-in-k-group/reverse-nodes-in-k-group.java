@@ -38,5 +38,10 @@ class Solution {
         }
         main.next = helper(curr, k, count-k);
         return prev;
+
+        // for first example, the first recursive call would give me something like this
+        // null<-1<-2<-3
+        // main is still at node with value 1
+        // hence 1.next is linked to next reversal and chain goes on
     }
 }
