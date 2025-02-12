@@ -3,8 +3,8 @@ import java.time.Instant;
 import java.util.stream.Collectors;
 
 class Twitter {
-    private Map<Integer, User> users;  // Maps userId to User object
-    private List<Tweet> tweets;        // Stores all tweets
+    private Map<Integer, User> users;  
+    private List<Tweet> tweets;       
     
     public Twitter() {
         users = new HashMap<>();
@@ -24,11 +24,11 @@ class Twitter {
 
         User user = users.get(userId);
         Set<Integer> followings = user.following;
-        followings.add(userId);  // Include user's own tweets
+        followings.add(userId);  
 
         return tweets.stream()
                 .filter(tweet -> followings.contains(tweet.postedBy))
-                .sorted((t1, t2) -> t2.postedOn.compareTo(t1.postedOn)) // Latest first
+                .sorted((t1, t2) -> t2.postedOn.compareTo(t1.postedOn)) 
                 .limit(10)
                 .map(tweet -> tweet.id)
                 .collect(Collectors.toList());
