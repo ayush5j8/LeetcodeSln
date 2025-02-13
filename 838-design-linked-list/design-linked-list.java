@@ -1,5 +1,5 @@
 class MyLinkedList {
-    private LinkNode head, tail;
+    private DoubleLinkNode head, tail;
     private int size;
 
     public MyLinkedList() {
@@ -10,7 +10,7 @@ class MyLinkedList {
     
     public int get(int index) {
         if (index < 0 || index >= size) return -1;
-        LinkNode current;
+        DoubleLinkNode current;
         if (index < size / 2) {
             current = head;
             for (int i = 0; i < index; i++) {
@@ -26,7 +26,7 @@ class MyLinkedList {
     }
     
     public void addAtHead(int val) {
-        LinkNode newNode = new LinkNode(val, null, head);
+        DoubleLinkNode newNode = new DoubleLinkNode(val, null, head);
         if (head != null) {
             head.prev = newNode;
         }
@@ -42,7 +42,7 @@ class MyLinkedList {
             addAtHead(val);
             return;
         }
-        LinkNode newNode = new LinkNode(val, tail, null);
+        DoubleLinkNode newNode = new DoubleLinkNode(val, tail, null);
         tail.next = newNode;
         tail = newNode;
         size++;
@@ -58,11 +58,11 @@ class MyLinkedList {
             addAtTail(val);
             return;
         }
-        LinkNode prev = head;
+        DoubleLinkNode prev = head;
         for (int i = 0; i < index - 1; i++) {
             prev = prev.next;
         }
-        LinkNode newNode = new LinkNode(val, prev, prev.next);
+        DoubleLinkNode newNode = new DoubleLinkNode(val, prev, prev.next);
         prev.next.prev = newNode;
         prev.next = newNode;
         size++;
@@ -78,7 +78,7 @@ class MyLinkedList {
             tail = tail.prev;
             tail.next = null;
         } else {
-            LinkNode prev = head;
+            DoubleLinkNode prev = head;
             for (int i = 0; i < index - 1; i++) {
                 prev = prev.next;
             }
@@ -89,17 +89,17 @@ class MyLinkedList {
     }
 }
 
-class LinkNode {
+class DoubleLinkNode {
     int val;
-    LinkNode prev, next;
+    DoubleLinkNode prev, next;
     
-    LinkNode(int val) {
+    DoubleLinkNode(int val) {
         this.val = val;
         this.prev = null;
         this.next = null;
     }
     
-    LinkNode(int val, LinkNode prev, LinkNode next) {
+    DoubleLinkNode(int val, DoubleLinkNode prev, DoubleLinkNode next) {
         this.val = val;
         this.prev = prev;
         this.next = next;
